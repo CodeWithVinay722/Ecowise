@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoWise - Sustainable Living Companion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-green: #2E8B57;
+      --dark-green: #1E5631;
+      --light-green: #A4DEA6;
+      --earth-brown: #8B5A2B;
+      --sky-blue: #87CEEB;
+      --leaf-green: #4CAF50;
+      --white: #FFFFFF;
+      --off-white: #F5F5F5;
+      --text-dark: #333333;
+      --text-light: #666666;
+    }
+
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    body {
+      font-family: 'Open Sans', sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: var(--off-white);
+      background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      background-blend-mode: overlay;
+      overflow-x: hidden;
+    }
+
+    /* Login Page Styles */
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1001;
+    }
+
+    .login-box {
+      background-color: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+    }
+
+    .login-box h2 {
+      color: var(--dark-green);
+      margin-bottom: 25px;
+    }
+
+    .login-form .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .login-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark-green);
+    }
+
+    .login-form input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .login-form input:focus {
+      outline: none;
+      border-color: var(--primary-green);
+      box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.2);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+
+    .login-btn:hover {
+      background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
+      transform: translateY(-2px);
+    }
+
+    .login-footer {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    .login-footer a {
+      color: var(--primary-green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Main Content Styles (initially hidden) */
+    #mainContent {
+      display: none;
+    }
+
+    header, nav, main, footer { 
+      padding: 20px; 
+      max-width: 1200px; 
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    header { 
+      background-color: rgba(46, 139, 87, 0.9);
+      color: var(--white); 
+      text-align: center; 
+      padding: 50px 20px;
+      border-radius: 0 0 15px 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+      opacity: 0.2;
+      z-index: -1;
+    }
+    
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    header p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    nav { 
+      background: rgba(255, 255, 255, 0.95); 
+      text-align: center; 
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-radius: 50px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: var(--dark-green);
+      font-weight: 600;
+      padding: 10px 20px;
+      transition: all 0.3s ease;
+      border-radius: 30px;
+      position: relative;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    nav a:hover {
+      color: var(--white);
+      background-color: var(--primary-green);
+      transform: translateY(-2px);
+    }
+
+    nav a.active {
+      background-color: var(--primary-green);
+      color: var(--white);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--light-green);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 60%;
+    }
+
+    main { 
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    section { 
+      background-color: rgba(255, 255, 255, 0.95); 
+      padding: 30px; 
+      border-radius: 15px; 
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transition: all 0.4s ease;
+      border-left: 5px solid var(--primary-green);
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--dark-green);
+      margin-bottom: 20px;
+      font-size: 2rem;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--primary-green);
+      border-radius: 3px;
+    }
+
+    p {
+      color: var(--text-light);
+      margin-bottom: 15px;
+      line-height: 1.8;
+    }
+
+    .feature-list { 
+      list-style: none; 
+      padding-left: 0;
+      margin-top: 20px;
+    }
+
+    .feature-list li {
+      padding: 10px 0;
+      border-bottom: 1px dashed #e0e0e0;
+      display: flex;
+      align-items: center;
+    }
+
+    .feature-list li:last-child {
+      border-bottom: none;
+    }
+
+    .feature-list li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: var(--primary-green);
+      margin-right: 15px;
+      font-size: 1.2rem;
+    }
+
+    form input, form textarea, form select { 
+      width: 100%; 
+      padding: 12px 15px; 
+      margin: 10px 0 20px; 
+      border: 1px solid #ddd; 
+      border-radius: 8px; 
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background-color: rgba(255,255,255,0.8);
+    }
+
+    form input:focus, form textarea:focus, form select:focus {
+      outline: none;
+      border-color: var(--primary-green);
+      box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.2);
+    }
+    
+    form button {
+      background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+      color: white;
+      padding: 14px 30px;
+      border: none;
+      cursor: pointer;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba(46, 139, 87, 0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    form button:hover {
+      background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(46, 139, 87, 0.4);
+    }
+
+    form button:active {
+      transform: translateY(1px);
+    }
+
+    footer { 
+      background-color: rgba(30, 86, 49, 0.9); 
+      color: var(--white); 
+      text-align: center; 
+      padding: 30px 20px; 
+      margin-top: 50px;
+      border-radius: 15px 15px 0 0;
+      position: relative;
+    }
+
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://images.unsplash.com/photo-1476231682828-37e571bc172f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+      opacity: 0.2;
+      z-index: -1;
+      border-radius: 15px 15px 0 0;
+    }
+
+    footer p {
+      color: var(--white);
+      margin-bottom: 0;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      color: var(--white);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--light-green);
+      transform: translateY(-3px);
+    }
+
+    .leaf-decoration {
+      position: absolute;
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    .leaf-1 {
+      top: 10%;
+      left: 5%;
+      transform: rotate(-15deg);
+      color: var(--leaf-green);
+      font-size: 3rem;
+    }
+
+    .leaf-2 {
+      bottom: 15%;
+      right: 5%;
+      transform: rotate(25deg);
+      color: var(--primary-green);
+      font-size: 4rem;
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 30px 0;
+    }
+
+    .calculator-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      border-top: 3px solid var(--primary-green);
+    }
+
+    .calculator-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .calculator-card h3 {
+      color: var(--dark-green);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .calculator-card h3 i {
+      color: var(--primary-green);
+      font-size: 1.5rem;
+    }
+
+    .calculator-card label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .result-card {
+      background: linear-gradient(135deg, rgba(164, 222, 166, 0.2), rgba(46, 139, 87, 0.1));
+      border-left: 5px solid var(--primary-green);
+      padding: 25px;
+      margin-top: 30px;
+      border-radius: 0 12px 12px 0;
+      display: none;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .result-card h4 {
+      color: var(--dark-green);
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+
+    #footprint-result {
+      color: var(--primary-green);
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .chat-interface {
+      background: var(--white);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      margin-top: 20px;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+      color: var(--white);
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .chat-header h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0;
+    }
+
+    .chat-header h2::after {
+      display: none;
+    }
+
+    .status-indicator {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--light-green);
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--light-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .chat-messages {
+      height: 350px;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background-color: rgba(244, 248, 244, 0.7);
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      line-height: 1.5;
+      animation: messageIn 0.3s ease-out;
+      position: relative;
+    }
+
+    @keyframes messageIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .user-message {
+      align-self: flex-end;
+      background-color: var(--primary-green);
+      color: var(--white);
+      border-bottom-right-radius: 4px;
+    }
+
+    .bot-message {
+      align-self: flex-start;
+      background-color: var(--white);
+      border: 1px solid #e0e0e0;
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .typing-indicator {
+      align-self: flex-start;
+      background-color: var(--white);
+      padding: 12px 16px;
+      border-radius: 12px;
+      border-bottom-left-radius: 4px;
+      display: inline-flex;
+      gap: 4px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--text-light);
+      border-radius: 50%;
+      animation: typingAnimation 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingAnimation {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+    }
+
+    .input-area {
+      padding: 16px;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      gap: 12px;
+      background: var(--white);
+    }
+
+    #userInput {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid #e0e0e0;
+      border-radius: 24px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    #userInput:focus {
+      border-color: var(--primary-green);
+      box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.2);
+    }
+
+    .send-button {
+      background-color: var(--primary-green);
+      color: var(--white);
+      border: none;
+      border-radius: 24px;
+      padding: 0 24px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .send-button:hover {
+      background-color: var(--dark-green);
+      transform: scale(1.03);
+    }
+
+    .send-button:active {
+      transform: scale(0.98);
+    }
+
+    .send-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .timestamp {
+      font-size: 0.7rem;
+      opacity: 0.7;
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    .error-message {
+      color: #e74c3c;
+      background-color: rgba(231, 76, 60, 0.1);
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 8px;
+      animation: shake 0.5s;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+
+    .news-panel {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border-left: 5px solid var(--primary-green);
+      margin-bottom: 30px;
+    }
+
+    .news-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .news-title {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--dark-green);
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .news-title i {
+      color: var(--primary-green);
+    }
+
+    .news-container {
+      height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .news-ticker {
+      position: absolute;
+      width: 100%;
+      animation: scrollNews 30s linear infinite;
+    }
+
+    @keyframes scrollNews {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100%); }
+    }
+
+    .news-item {
+      padding: 15px 0;
+      border-bottom: 1px dashed #e0e0e0;
+    }
+
+    .news-item:last-child {
+      border-bottom: none;
+    }
+
+    .news-item h3 {
+      color: var(--dark-green);
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .news-item p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+
+    .news-date {
+      color: var(--primary-green);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .news-source {
+      color: var(--earth-brown);
+      font-size: 0.8rem;
+      font-style: italic;
+    }
+
+    .ticker-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .ticker-label {
+      background: rgba(0,0,0,0.2);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-right: 20px;
+      white-space: nowrap;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .ticker-content {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      height: 24px;
+    }
+
+    .ticker-items {
+      position: absolute;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      animation: scrollTicker 200s linear infinite;
+    }
+
+    @keyframes scrollTicker {
+      0% { transform: translateX(100%); }
+      90% { transform: translateX(-100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .ticker-item {
+      padding: 0 40px;
+      white-space: nowrap;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .ticker-item i {
+      margin-right: 10px;
+      color: var(--light-green);
+    }
+
+    /* New styles for leaderboard and history */
+    .leaderboard {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border-left: 5px solid var(--primary-green);
+      margin-bottom: 30px;
+    }
+
+    .leaderboard h3 {
+      color: var(--dark-green);
+      margin-bottom: 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .leaderboard h3 i {
+      color: var(--primary-green);
+    }
+
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .leaderboard-table th {
+      background-color: var(--primary-green);
+      color: white;
+      padding: 12px;
+      text-align: left;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .leaderboard-table td {
+      padding: 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .leaderboard-table tr:nth-child(even) {
+      background-color: rgba(164, 222, 166, 0.1);
+    }
+
+    .leaderboard-table tr:hover {
+      background-color: rgba(46, 139, 87, 0.1);
+    }
+
+    .rank {
+      font-weight: bold;
+      color: var(--dark-green);
+      width: 50px;
+    }
+
+    .user-score {
+      font-weight: 600;
+      color: var(--primary-green);
+    }
+
+    .history-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border-left: 5px solid var(--primary-green);
+    }
+
+    .history-section h3 {
+      color: var(--dark-green);
+      margin-bottom: 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .history-section h3 i {
+      color: var(--primary-green);
+    }
+
+    .history-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .history-item {
+      padding: 15px 0;
+      border-bottom: 1px dashed #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+    }
+
+    .history-date {
+      color: var(--primary-green);
+      font-weight: 600;
+      min-width: 100px;
+    }
+
+    .history-value {
+      font-weight: 600;
+      color: var(--dark-green);
+    }
+
+    .history-comparison {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .clear-history {
+      background: none;
+      border: none;
+      color: var(--primary-green);
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .clear-history:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      
+      header p {
+        font-size: 1rem;
+      }
+      
+      nav a {
+        display: block;
+        margin: 8px auto;
+        width: 90%;
+      }
+      
+      .calculator-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .chat-messages {
+        height: 300px;
+      }
+      
+      section {
+        padding: 20px;
+      }
+
+      .news-container {
+        height: 250px;
+      }
+
+      .ticker-label {
+        display: none;
+      }
+
+      .login-box {
+        padding: 30px 20px;
+        margin: 0 20px;
+      }
+
+      .ticker-item {
+        padding: 0 30px;
+        font-size: 1rem;
+      }
+
+      .leaderboard-table th, 
+      .leaderboard-table td {
+        padding: 8px;
+        font-size: 0.9rem;
+      }
+
+      .history-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+
+      .history-date {
+        margin-bottom: 5px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 30px 15px;
+      }
+      
+      header h1 {
+        font-size: 1.8rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      .input-area {
+        flex-direction: column;
+      }
+      
+      .send-button {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+      }
+
+      .news-title {
+        font-size: 1.3rem;
+      }
+
+      .ticker-item {
+        font-size: 0.9rem;
+        padding: 0 20px;
+      }
+
+      .leaderboard h3,
+      .history-section h3 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Page (shown first) -->
+  <div id="loginPage" class="login-container">
+    <div class="login-box">
+      <h2>Welcome to EcoWise</h2>
+      <form class="login-form">
+        <div class="input-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="input-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password" required>
+        </div>
+        <button type="button" class="login-btn" onclick="loginUser()">Login</button>
+      </form>
+      <div class="login-footer">
+        <p>Don't have an account? <a href="#" onclick="showSignup()">Sign up</a></p>
+        <p><a href="#">Forgot password?</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signup Page (hidden by default) -->
+  <div id="signupPage" class="login-container hidden">
+    <div class="login-box">
+      <h2>Create Your Account</h2>
+      <form class="login-form">
+        <div class="input-group">
+          <label for="signupName">Full Name</label>
+          <input type="text" id="signupName" placeholder="Enter your full name" required>
+        </div>
+        <div class="input-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="input-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" placeholder="Create a password" required>
+        </div>
+        <div class="input-group">
+          <label for="signupConfirm">Confirm Password</label>
+          <input type="password" id="signupConfirm" placeholder="Confirm your password" required>
+        </div>
+        <button type="button" class="login-btn" onclick="signupUser()">Sign Up</button>
+      </form>
+      <div class="login-footer">
+        <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content (hidden until login) -->
+  <div id="mainContent">
+    <i class="fas fa-leaf leaf-decoration leaf-1"></i>
+    <i class="fas fa-seedling leaf-decoration leaf-2"></i>
+
+    <header>
+      <h1>ECOWISE</h1>
+      <p>Your Sustainable Living Companion for a Greener Future</p>
+    </header>
+
+    <nav>
+      <a href="#home" class="active"><i class="fas fa-home"></i> Home</a>
+      <a href="#features"><i class="fas fa-leaf"></i> Features</a>
+      <a href="#tracker"><i class="fas fa-chart-line"></i> Tracker</a>
+      <a href="#chat-section"><i class="fas fa-robot"></i> Eco Assistant</a>
+      <a href="#calculator"><i class="fas fa-calculator"></i> Calculator</a>
+      <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+      <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+      <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </nav>
+
+    <main>
+      <section id="home">
+        <h2>Welcome to EcoWise</h2>
+        <p>Join us in making a positive impact on our planet. Small changes in your daily routine can lead to significant environmental benefits. Together, we can create a sustainable future for generations to come.</p>
+        <p>EcoWise helps you track your environmental footprint, provides personalized recommendations, and connects you with a community of like-minded individuals committed to sustainable living.</p>
+      </section>
+
+      <section id="news">
+        <div class="news-panel">
+          <div class="news-header">
+            <div class="news-title">
+              <i class="fas fa-newspaper"></i>
+              <h2>Latest Environmental News</h2>
+            </div>
+          </div>
+          <div class="news-container">
+            <div class="news-ticker">
+              <div class="news-item">
+                <h3>Global Renewable Energy Capacity Hits Record High</h3>
+                <p>New report shows renewable energy sources now account for over 30% of global electricity generation, with solar leading the growth.</p>
+                <span class="news-date">january 15, 2025</span> • <span class="news-source">International Energy Agency</span>
+              </div>
+              <div class="news-item">
+                <h3>Scientists Discover New Method to Break Down Plastic Waste</h3>
+                <p>Breakthrough enzyme technology can decompose PET plastics in days rather than centuries, offering hope for ocean cleanup.</p>
+                <span class="news-date">january 12, 2025</span> • <span class="news-source">Nature Journal</span>
+              </div>
+              <div class="news-item">
+                <h3>EU Approves Sweeping Climate Legislation Package</h3>
+                <p>The European Parliament has approved a comprehensive set of laws aiming for carbon neutrality by 2040, including stricter emissions targets.</p>
+                <span class="news-date">march 10, 2025</span> • <span class="news-source">European Environmental Bureau</span>
+              </div>
+              <div class="news-item">
+                <h3>Great Barrier Reef Shows Signs of Recovery</h3>
+                <p>Marine biologists report coral regrowth in several sections of the reef following conservation efforts and cooler water temperatures.</p>
+                <span class="news-date">January 8, 2025</span> • <span class="news-source">Marine Conservation Society</span>
+              </div>
+              <div class="news-item">
+                <h3>Global Initiative Plants 1 Billion Trees in 2023</h3>
+                <p>Reforestation efforts across 50 countries have surpassed initial targets, creating new carbon sinks and habitats.</p>
+                <span class="news-date">January 5, 2025</span> • <span class="news-source">World Wildlife Fund</span>
+              </div>
+              <div class="news-item">
+                <h3>Electric Vehicle Sales Surpass Diesel in Europe</h3>
+                <p>For the first time, more electric vehicles were sold than diesel cars in the European market last quarter.</p>
+                <span class="news-date">January 3, 2025</span> • <span class="news-source">Clean Transport Europe</span>
+              </div>
+              <div class="news-item">
+                <h3>Urban Farming Reduces City Heat Islands</h3>
+                <p>Study shows rooftop gardens and community farms can lower local temperatures by up to 3°C during heat waves.</p>
+                <span class="news-date">May 30, 2025</span> • <span class="news-source">Urban Sustainability Journal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features">
+        <h2>Our Eco-Friendly Features</h2>
+        <p>Discover how EcoWise can help you live more sustainably:</p>
+        <ul class="feature-list">
+          <li>Personalized carbon footprint analysis</li>
+          <li>Daily sustainability challenges</li>
+          <li>Smart habit tracking with progress reports</li>
+          <li>Local recycling and composting guides</li>
+          <li>Energy and water saving recommendations</li>
+          <li>Community of eco-conscious individuals</li>
+        </ul>
+      </section>
+
+      <section id="tracker">
+        <h2><i class="fas fa-trophy"></i> Eco Leaderboard</h2>
+        <p>See how you compare with other EcoWise users in reducing carbon footprint:</p>
+        
+        <div class="leaderboard">
+          <h3><i class="fas fa-chart-line"></i> Top Performers</h3>
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Carbon Footprint (kg CO₂)</th>
+                <th>Improvement</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-body">
+              <!-- Leaderboard data will be inserted here by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="history-section">
+          <h3><i class="fas fa-history"></i> Your Carbon History</h3>
+          <p>Track your progress over time with your carbon footprint calculations:</p>
+          <ul class="history-list" id="history-list">
+            <!-- History data will be inserted here by JavaScript -->
+          </ul>
+          <button class="clear-history" onclick="clearHistory()">
+            <i class="fas fa-trash-alt"></i> Clear History
+          </button>
+        </div>
+      </section>
+
+      <section id="calculator">
+        <h2>Carbon Footprint Calculator</h2>
+        <p>Understand your environmental impact by calculating your annual carbon emissions in kg CO₂</p>
+        
+        <div class="calculator-grid">
+          <div class="calculator-card">
+            <h3><i class="fas fa-home"></i> Home Energy</h3>
+            <label>Monthly Electricity (kWh)</label>
+            <input type="number" id="electricity" min="0" class="calc-input" placeholder="300">
+            
+            <label>Heating Type</label>
+            <select id="heating-type" class="calc-input">
+              <option value="electric">Electric</option>
+              <option value="gas">Natural Gas</option>
+              <option value="oil">Heating Oil</option>
+            </select>
+          </div>
+          
+          <div class="calculator-card">
+            <h3><i class="fas fa-car"></i> Transportation</h3>
+            <label>Annual KM Driven</label>
+            <input type="number" id="car-mileage" min="0" class="calc-input" placeholder="10000">
+            
+            <label>Annual Public Transport KM</label>
+            <input type="number" id="public-transport" min="0" class="calc-input" placeholder="2000">
+          </div>
+          
+          <div class="calculator-card">
+            <h3><i class="fas fa-utensils"></i> Lifestyle</h3>
+            <label>Diet Type</label>
+            <select id="diet" class="calc-input">
+              <option value="vegan">Vegan</option>
+              <option value="vegetarian">Vegetarian</option>
+              <option value="meat-occasional">Meat Occasionally</option>
+              <option value="meat-daily">Meat Daily</option>
+            </select>
+            
+            <label>Annual Air Travel Hours</label>
+            <input type="number" id="air-travel" min="0" class="calc-input" placeholder="10">
+          </div>
+        </div>
+        
+        <button onclick="calculateFootprint()" class="send-button">
+          <i class="fas fa-calculator"></i> Calculate Footprint
+        </button>
+        
+        <div class="result-card" id="result-card">
+          <h4>Your Carbon Footprint Results</h4>
+          <p>Your estimated annual carbon footprint is: <strong id="footprint-result" class="counter">0</strong> kg CO₂</p>
+          <p id="footprint-comparison" style="margin-top: 10px;"></p>
+        </div>
+      </section>
+
+      <section id="chat-section">
+        <h2>Ask Our Eco Assistant</h2>
+        <p>Get personalized advice on how to reduce your environmental impact and live more sustainably.</p>
+        <div class="chat-interface">
+          <div class="chat-header">
+            <h2>Eco Assistant</h2>
+            <div class="status-indicator">
+              <div class="status-dot"></div>
+              <span>Ready to help</span>
+            </div>
+          </div>
+          
+          <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+              Hello! I'm your Eco Assistant. Ask me anything about sustainable living, reducing your carbon footprint, or eco-friendly habits. How can I help you today?
+              <div class="timestamp" id="initialTimestamp"></div>
+            </div>
+          </div>
+          
+          <div class="input-area">
+            <input type="text" id="userInput" placeholder="Ask about recycling, energy saving, sustainable products..." autocomplete="off">
+            <button class="send-button" onclick="askCrew()">
+              <i class="fas fa-paper-plane"></i> Send
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <h2>About EcoWise</h2>
+        <p>EcoWise was founded in 2023 with a simple mission: to make sustainable living accessible and achievable for everyone. Our team of environmental scientists, developers, and sustainability experts work together to create tools that empower individuals to make a difference.</p>
+        <p>We believe that collective small actions can lead to big changes. By providing clear information, practical tools, and a supportive community, we help bridge the gap between intention and action in environmental conservation.</p>
+      </section>
+
+      <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Have questions or suggestions? We'd love to hear from you!</p>
+        <form>
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="Enter your name">
+          
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="Enter your email">
+          
+          <label for="message">Your Message</label>
+          <textarea id="message" rows="5" placeholder="How can we help you?"></textarea>
+          
+          <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>EcoWise © 2025. Committed to a greener planet.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </footer>
+
+    <div class="tips-ticker">
+      <div class="ticker-container">
+        <div class="ticker-label">
+          <i class="fas fa-lightbulb"></i> Eco Tips
+        </div>
+        <div class="ticker-content">
+          <div class="ticker-items">
+            <div class="ticker-item"><i class="fas fa-tint"></i> Fix leaky faucets - a dripping tap can waste 20 liters of water per day</div>
+            <div class="ticker-item"><i class="fas fa-bolt"></i> Unplug electronics when not in use - standby power can account for 10% of home energy use</div>
+            <div class="ticker-item"><i class="fas fa-shopping-bag"></i> Bring reusable bags when shopping - plastic bags take 500+ years to decompose</div>
+            <div class="ticker-item"><i class="fas fa-bicycle"></i> Bike or walk for short trips - reduces emissions and improves health</div>
+            <div class="ticker-item"><i class="fas fa-thermometer-half"></i> Lower your thermostat by 1°C - can reduce heating energy use by 10%</div>
+            <div class="ticker-item"><i class="fas fa-recycle"></i> Recycle aluminum cans - saves 95% of the energy needed to make new ones</div>
+            <div class="ticker-item"><i class="fas fa-leaf"></i> Plant native species - they require less water and support local wildlife</div>
+            <div class="ticker-item"><i class="fas fa-bolt"></i> Unplug electronics when not in use - standby power can account for 10% of home energy use</div>
+            <div class="ticker-item"><i class="fas fa-shopping-bag"></i> Bring reusable bags when shopping - plastic bags take 500+ years to decompose</div>
+            <div class="ticker-item"><i class="fas fa-bicycle"></i> Bike or walk for short trips - reduces emissions and improves health</div>
+            <div class="ticker-item"><i class="fas fa-thermometer-half"></i> Lower your thermostat by 1°C - can reduce heating energy use by 10%</div>
+            <div class="ticker-item"><i class="fas fa-bolt"></i> Unplug electronics when not in use - standby power can account for 10% of home energy use</div>
+            <div class="ticker-item"><i class="fas fa-shopping-bag"></i> Bring reusable bags when shopping - plastic bags take 500+ years to decompose</div>
+            <div class="ticker-item"><i class="fas fa-bicycle"></i> Bike or walk for short trips - reduces emissions and improves health</div>
+            <div class="ticker-item"><i class="fas fa-thermometer-half"></i> Lower your thermostat by 1°C - can reduce heating energy use by 10%</div>
+            <div class="ticker-item"><i class="fas fa-recycle"></i> Recycle aluminum cans - saves 95% of the energy needed to make new ones</div>
+            <div class="ticker-item"><i class="fas fa-leaf"></i> Plant native species - they require less water and support local wildlife</div>
+            <div class="ticker-item"><i class="fas fa-utensils"></i> Reduce meat consumption - livestock accounts for 14.5% of global emissions</div>
+            <div class="ticker-item"><i class="fas fa-lightbulb"></i> Switch to LED bulbs - they use 75% less energy and last 25 times longer</div>
+            <div class="ticker-item"><i class="fas fa-recycle"></i> Recycle aluminum cans - saves 95% of the energy needed to make new ones</div>
+            <div class="ticker-item"><i class="fas fa-bolt"></i> Unplug electronics when not in use - standby power can account for 10% of home energy use</div>
+            <div class="ticker-item"><i class="fas fa-shopping-bag"></i> Bring reusable bags when shopping - plastic bags take 500+ years to decompose</div>
+            <div class="ticker-item"><i class="fas fa-bicycle"></i> Bike or walk for short trips - reduces emissions and improves health</div>
+            <div class="ticker-item"><i class="fas fa-thermometer-half"></i> Lower your thermostat by 1°C - can reduce heating energy use by 10%</div>
+            <div class="ticker-item"><i class="fas fa-recycle"></i> Recycle aluminum cans - saves 95% of the energy needed to make new ones</div>
+            <div class="ticker-item"><i class="fas fa-leaf"></i> Plant native species - they require less water and support local wildlife</div>
+            <div class="ticker-item"><i class="fas fa-bolt"></i> Unplug electronics when not in use - standby power can account for 10% of home energy use</div>
+            <div class="ticker-item"><i class="fas fa-shopping-bag"></i> Bring reusable bags when shopping - plastic bags take 500+ years to decompose</div>
+            <div class="ticker-item"><i class="fas fa-bicycle"></i> Bike or walk for short trips - reduces emissions and improves health</div>
+            <div class="ticker-item"><i class="fas fa-thermometer-half"></i> Lower your thermostat by 1°C - can reduce heating energy use by 10%</div>
+            <div class="ticker-item"><i class="fas fa-bolt"></i> Unplug electronics when not in use - standby power can account for 10% of home energy use</div>
+            <div class="ticker-item"><i class="fas fa-shopping-bag"></i> Bring reusable bags when shopping - plastic bags take 500+ years to decompose</div>
+            <div class="ticker-item"><i class="fas fa-bicycle"></i> Bike or walk for short trips - reduces emissions and improves health</div>
+            <div class="ticker-item"><i class="fas fa-thermometer-half"></i> Lower your thermostat by 1°C - can reduce heating energy use by 10%</div>
+            <div class="ticker-item"><i class="fas fa-recycle"></i> Recycle aluminum cans - saves 95% of the energy needed to make new ones</div>
+            <div class="ticker-item"><i class="fas fa-leaf"></i> Plant native species - they require less water and support local wildlife</div>
+            <div class="ticker-item"><i class="fas fa-utensils"></i> Reduce meat consumption - livestock accounts for 14.5% of global emissions</div>
+            <div class="ticker-item"><i class="fas fa-lightbulb"></i> Switch to LED bulbs - they use 75% less energy and last 25 times longer</div>
+            <div class="ticker-item"><i class="fas fa-recycle"></i> Recycle aluminum cans - saves 95% of the energy needed to make new ones</div>
+            <div class="ticker-item"><i class="fas fa-leaf"></i> Plant native species - they require less water and support local wildlife</div>
+            <div class="ticker-item"><i class="fas fa-utensils"></i> Reduce meat consumption - livestock accounts for 14.5% of global emissions</div>
+            <div class="ticker-item"><i class="fas fa-lightbulb"></i> Switch to LED bulbs - they use 75% less energy and last 25 times longer</div>
+            <div class="ticker-item"><i class="fas fa-utensils"></i> Reduce meat consumption - livestock accounts for 14.5% of global emissions</div>
+            <div class="ticker-item"><i class="fas fa-leaf"></i> Plant native species - they require less water and support local wildlife</div>
+            <div class="ticker-item"><i class="fas fa-utensils"></i> Reduce meat consumption - livestock accounts for 14.5% of global emissions</div>
+            <div class="ticker-item"><i class="fas fa-lightbulb"></i> Switch to LED bulbs - they use 75% less energy and last 25 times longer</div>
+            <div class="ticker-item"><i class="fas fa-utensils"></i> Reduce meat consumption - livestock accounts for 14.5% of global emissions</div>
+            <div class="ticker-item"><i class="fas fa-lightbulb"></i> Switch to LED bulbs - they use 75% less energy and last 25 times longer</div>
+            <div class="ticker-item"><i class="fas fa-cloud"></i> Line dry clothes - saves energy and makes clothes last longer</div>
+            <div class="ticker-item"><i class="fas fa-bottle-water"></i> Use a reusable water bottle - saves money and reduces plastic waste</div>
+            <div class="ticker-item"><i class="fas fa-car"></i> Maintain proper tire pressure - improves fuel efficiency by 3%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // User database with carbon footprint scores
+    const userDatabase = {
+      "vinay@example.com": {
+        name: "Vinay",
+        password: "password123",
+        carbonScore: 3800,
+        improvement: "15% reduction",
+        history: [
+          { date: "2025-05-15", value: 3800, comparison: "Better than 75% of users" },
+          { date: "2025-04-10", value: 4200, comparison: "Better than 65% of users" },
+          { date: "2025-03-05", value: 4500, comparison: "Better than 55% of users" }
+        ]
+      },
+      "udit@example.com": {
+        name: "Udit",
+        password: "password123",
+        carbonScore: 4200,
+        improvement: "8% reduction",
+        history: [
+          { date: "2025-05-12", value: 4200, comparison: "Better than 65% of users" },
+          { date: "2025-04-08", value: 4500, comparison: "Better than 55% of users" },
+          { date: "2025-03-01", value: 4800, comparison: "Better than 45% of users" }
+        ]
+      },
+      "vinod@example.com": {
+        name: "Vinod",
+        password: "password123",
+        carbonScore: 5200,
+        improvement: "5% reduction",
+        history: [
+          { date: "2025-05-10", value: 5200, comparison: "Better than 45% of users" },
+          { date: "2025-04-05", value: 5400, comparison: "Better than 40% of users" },
+          { date: "2025-02-28", value: 5500, comparison: "Better than 35% of users" }
+        ]
+      },
+      "sugandha@example.com": {
+        name: "Sugandha",
+        password: "password123",
+        carbonScore: 3500,
+        improvement: "20% reduction",
+        history: [
+          { date: "2025-05-18", value: 3500, comparison: "Better than 85% of users" },
+          { date: "2025-04-15", value: 3800, comparison: "Better than 75% of users" },
+          { date: "2025-03-10", value: 4200, comparison: "Better than 65% of users" }
+        ]
+      }
+    };
+
+    // Current user variable
+    let currentUser = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Show login page first
+      document.getElementById('loginPage').classList.remove('hidden');
+      document.getElementById('mainContent').style.display = 'none';
+      
+      // Set initial timestamp for chat
+      const now = new Date();
+      document.getElementById('initialTimestamp').textContent = formatTime(now);
+      
+      // Setup chat input event listener
+      document.getElementById('userInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          askCrew();
+        }
+      });
+
+      // Setup navigation
+      document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          if (this.getAttribute('href') === '#') return;
+          
+          e.preventDefault();
+          
+          document.querySelectorAll('nav a').forEach(link => {
+            link.classList.remove('active');
+          });
+          
+          this.classList.add('active');
+          
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          window.scrollTo({
+            top: targetElement.offsetTop - 20,
+            behavior: 'smooth'
+          });
+        });
+      });
+
+      // Setup news ticker hover effect
+      const newsTicker = document.querySelector('.news-ticker');
+      newsTicker.addEventListener('mouseenter', () => {
+        newsTicker.style.animationPlayState = 'paused';
+      });
+      newsTicker.addEventListener('mouseleave', () => {
+        newsTicker.style.animationPlayState = 'running';
+      });
+
+      // Duplicate ticker items for seamless looping
+      const tickerItems = document.querySelector('.ticker-items');
+      const tickerItemCount = tickerItems.children.length;
+      
+      for (let i = 0; i < tickerItemCount; i++) {
+        const clone = tickerItems.children[i].cloneNode(true);
+        tickerItems.appendChild(clone);
+      }
+    });
+
+    // Login/Signup Functions
+    function showLogin() {
+      document.getElementById('loginPage').classList.remove('hidden');
+      document.getElementById('signupPage').classList.add('hidden');
+    }
+
+    function showSignup() {
+      document.getElementById('loginPage').classList.add('hidden');
+      document.getElementById('signupPage').classList.remove('hidden');
+    }
+
+    function loginUser() {
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      // Simple validation
+      if (!email || !password) {
+        alert('Please enter both email and password');
+        return;
+      }
+      
+      // Check if user exists
+      if (userDatabase[email] && userDatabase[email].password === password) {
+        currentUser = userDatabase[email];
+        
+        // For demo purposes, just show the main content
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('mainContent').style.display = 'block';
+        
+        // Update leaderboard and history
+        updateLeaderboard();
+        updateHistory();
+        
+        // Scroll to top
+        window.scrollTo(0, 0);
+      } else {
+        alert('Invalid email or password');
+      }
+    }
+
+    function signupUser() {
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+      const confirm = document.getElementById('signupConfirm').value;
+      
+      // Simple validation
+      if (!name || !email || !password || !confirm) {
+        alert('Please fill in all fields');
+        return;
+      }
+      
+      if (password !== confirm) {
+        alert('Passwords do not match');
+        return;
+      }
+      
+      // Check if user already exists
+      if (userDatabase[email]) {
+        alert('User already exists with this email');
+        return;
+      }
+      
+      // Add new user to database with random carbon score between 3000-6000
+      const randomScore = Math.floor(Math.random() * 3000) + 3000;
+      const improvement = Math.floor(Math.random() * 20) + 1 + "% reduction";
+      
+      userDatabase[email] = {
+        name: name,
+        password: password,
+        carbonScore: randomScore,
+        improvement: improvement,
+        history: [
+          { 
+            date: new Date().toISOString().split('T')[0], 
+            value: randomScore, 
+            comparison: randomScore < 4000 ? "Better than 75% of users" : 
+                      randomScore < 5000 ? "Better than 55% of users" : "Better than 35% of users" 
+          }
+        ]
+      };
+      
+      // For demo purposes, just show the login form
+      showLogin();
+      alert('Account created successfully! Please login.');
+    }
+
+    function logout() {
+      currentUser = null;
+      document.getElementById('mainContent').style.display = 'none';
+      document.getElementById('loginPage').classList.remove('hidden');
+      document.getElementById('loginEmail').value = '';
+      document.getElementById('loginPassword').value = '';
+    }
+
+    function formatTime(date) {
+      return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function formatDate(dateString) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return new Date(dateString).toLocaleDateString(undefined, options);
+    }
+
+    // Update leaderboard with user data
+    function updateLeaderboard() {
+      const leaderboardBody = document.getElementById('leaderboard-body');
+      leaderboardBody.innerHTML = '';
+      
+      // Create array of users for leaderboard
+      const users = [];
+      for (const email in userDatabase) {
+        users.push({
+          name: userDatabase[email].name,
+          score: userDatabase[email].carbonScore,
+          improvement: userDatabase[email].improvement
+        });
+      }
+      
+      // Sort by lowest carbon score (best first)
+      users.sort((a, b) => a.score - b.score);
+      
+      // Add rows to leaderboard
+      users.forEach((user, index) => {
+        const row = document.createElement('tr');
+        if (currentUser && user.name === currentUser.name) {
+          row.style.backgroundColor = 'rgba(46, 139, 87, 0.2)';
+          row.style.fontWeight = 'bold';
+        }
+        
+        row.innerHTML = `
+          <td class="rank">${index + 1}</td>
+          <td>${user.name}</td>
+          <td class="user-score">${user.score.toLocaleString()}</td>
+          <td>${user.improvement}</td>
+        `;
+        
+        leaderboardBody.appendChild(row);
+      });
+    }
+
+    // Update history display
+    function updateHistory() {
+      if (!currentUser) return;
+      
+      const historyList = document.getElementById('history-list');
+      historyList.innerHTML = '';
+      
+      currentUser.history.forEach(item => {
+        const historyItem = document.createElement('li');
+        historyItem.className = 'history-item';
+        historyItem.innerHTML = `
+          <span class="history-date">${formatDate(item.date)}</span>
+          <span class="history-value">${item.value.toLocaleString()} kg CO₂</span>
+          <span class="history-comparison">${item.comparison}</span>
+        `;
+        historyList.appendChild(historyItem);
+      });
+    }
+
+    // Clear user history
+    function clearHistory() {
+      if (!currentUser) return;
+      
+      if (confirm('Are you sure you want to clear your calculation history?')) {
+        currentUser.history = [];
+        updateHistory();
+      }
+    }
+
+    async function askCrew() {
+      const inputElement = document.getElementById("userInput");
+      const input = inputElement.value.trim();
+      const chatMessages = document.getElementById("chatMessages");
+      
+      if (!input) {
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'error-message';
+        errorMessage.textContent = "Please enter your question before sending.";
+        chatMessages.appendChild(errorMessage);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        return;
+      }
+      
+      const userMessage = document.createElement('div');
+      userMessage.className = 'message user-message';
+      userMessage.textContent = input;
+      
+      const userTimestamp = document.createElement('div');
+      userTimestamp.className = 'timestamp';
+      userTimestamp.textContent = formatTime(new Date());
+      userMessage.appendChild(userTimestamp);
+      
+      chatMessages.appendChild(userMessage);
+      
+      inputElement.value = '';
+      
+      const typingIndicator = document.createElement('div');
+      typingIndicator.className = 'typing-indicator';
+      typingIndicator.id = 'typingIndicator';
+      typingIndicator.innerHTML = `
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      `;
+      chatMessages.appendChild(typingIndicator);
+      
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      
+      try {
+        const response = await fetch('http://localhost:8000/ask', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ question: input }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        document.getElementById('typingIndicator')?.remove();
+        
+        const botMessage = document.createElement('div');
+        botMessage.className = 'message bot-message';
+        botMessage.textContent = data.answer || "I couldn't find an answer to that. Please try asking something else about sustainability.";
+        
+        const botTimestamp = document.createElement('div');
+        botTimestamp.className = 'timestamp';
+        botTimestamp.textContent = formatTime(new Date());
+        botMessage.appendChild(botTimestamp);
+        
+        chatMessages.appendChild(botMessage);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+      } catch (error) {
+        console.error("Error:", error);
+        
+        document.getElementById('typingIndicator')?.remove();
+        
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'message bot-message';
+        errorMessage.textContent = "I'm having trouble connecting right now. Here's a tip: Reducing your shower time by just 2 minutes can save up to 10 gallons of water!";
+        
+        const errorTimestamp = document.createElement('div');
+        errorTimestamp.className = 'timestamp';
+        errorTimestamp.textContent = formatTime(new Date());
+        errorMessage.appendChild(errorTimestamp);
+        
+        chatMessages.appendChild(errorMessage);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+    }
+
+    function animateCounter(element, target, duration = 1000) {
+      const start = 0;
+      const increment = target / (duration / 16);
+      let current = start;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          clearInterval(timer);
+          current = target;
+        }
+        element.textContent = Math.round(current).toLocaleString();
+      }, 16);
+    }
+
+    function calculateFootprint() {
+      const electricity = parseFloat(document.getElementById('electricity').value) || 0;
+      const carMileage = parseFloat(document.getElementById('car-mileage').value) || 0;
+      const publicTransport = parseFloat(document.getElementById('public-transport').value) || 0;
+      const airTravel = parseFloat(document.getElementById('air-travel').value) || 0;
+      const heatingType = document.getElementById('heating-type').value;
+      const diet = document.getElementById('diet').value;
+      
+      const electricityEmissions = electricity * 0.5 * 12;
+      const transportEmissions = carMileage * 0.12 + publicTransport * 0.03;
+      const airTravelEmissions = airTravel * 90;
+      
+      let heatingEmissions = 0;
+      if (heatingType === 'gas') heatingEmissions = 2000;
+      else if (heatingType === 'oil') heatingEmissions = 2500;
+      else heatingEmissions = electricity * 0.3 * 12;
+      
+      let dietEmissions = 0;
+      if (diet === 'vegan') dietEmissions = 800;
+      else if (diet === 'vegetarian') dietEmissions = 1200;
+      else if (diet === 'meat-occasional') dietEmissions = 1800;
+      else dietEmissions = 2500;
+      
+      const totalFootprint = Math.round(
+        electricityEmissions + 
+        transportEmissions + 
+        heatingEmissions + 
+        dietEmissions +
+        airTravelEmissions
+      );
+      
+      const resultElement = document.getElementById('footprint-result');
+      const resultCard = document.getElementById('result-card');
+      const comparisonElement = document.getElementById('footprint-comparison');
+      
+      resultCard.style.display = 'block';
+      animateCounter(resultElement, totalFootprint);
+      
+      let comparisonText = "";
+      if (totalFootprint < 4000) {
+        comparisonText = "This is excellent! You're below the global average of 4,000 kg per person. Keep up the great work!";
+      } else if (totalFootprint < 6000) {
+        comparisonText = "You're doing better than the US average of 16,000 kg per person, but there's room for improvement.";
+      } else {
+        comparisonText = "Your footprint is higher than ideal. Consider our recommendations to reduce your impact.";
+      }
+      
+      comparisonElement.textContent = comparisonText;
+      
+      // Update current user's score and history if logged in
+      if (currentUser) {
+        currentUser.carbonScore = totalFootprint;
+        
+        // Generate random improvement between 1-20%
+        const improvement = Math.floor(Math.random() * 20) + 1;
+        currentUser.improvement = `${improvement}% reduction`;
+        
+        // Add to history
+        currentUser.history.unshift({
+          date: new Date().toISOString().split('T')[0],
+          value: totalFootprint,
+          comparison: totalFootprint < 4000 ? "Better than 75% of users" : 
+                    totalFootprint < 6000 ? "Better than 55% of users" : "Better than 35% of users"
+        });
+        
+        // Update leaderboard and history display
+        updateLeaderboard();
+        updateHistory();
+      }
+      
+      setTimeout(() => {
+        resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 300);
+    }
+  </script>
+</body>
+</html>
+
